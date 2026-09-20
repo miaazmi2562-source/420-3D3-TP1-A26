@@ -5,6 +5,8 @@ POLICE_VALEUR = ("Segoe UI", 13, "bold")
 
 
 class Portfolio(Observateur):
+    # "Mon portfolio" : valeur totale et variation depuis l'ouverture,
+    # mises à jour à chaque cycle de rafraîchir()
     def __init__(self, fenetre):
         self.fenetre = fenetre
         frame_portfolio = tk.LabelFrame(self.fenetre, text="Mon portfolio", padx=10, pady=10)
@@ -14,6 +16,7 @@ class Portfolio(Observateur):
         self.label_variation = tk.Label(frame_portfolio, text="")
         self.label_variation.pack()
 
+    # Actualise l'affichage du Portfolio 
     def actualiser(self, sujet):
         donnees = sujet.get_donnees()
         valeur_totale = donnees["valeur_totale"]

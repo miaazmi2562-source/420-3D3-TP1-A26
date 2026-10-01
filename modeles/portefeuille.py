@@ -41,15 +41,16 @@ class Portefeuille(Sujet):
 
         # 2. Valeur totale du portefeuille actuelle et depuis l'ouverture
         for ticker, (prix, ouverture) in prix_actuels.items():
-            quantite = self.titres[ticker]["quantite"]
+            titre = self.titres[ticker]
+            quantite = titre["quantite"]
             valeur_totale += prix * quantite
             valeur_ouverture += ouverture * quantite
             # 3. Alertes : un titre est signalé s'il atteint ou dépasse son seuil haut,
             # ou atteint ou descend sous son seuil bas
-            if prix >= self.titres[ticker]["seuil_haut"]:
-                alertes.append(f"⚠️ {ticker} dépasse le seuil haut ({prix:.2f} $ ≥ {self.titres[ticker]['seuil_haut']:.2f} $)")
-            elif prix <= self.titres[ticker]["seuil_bas"]:
-                alertes.append(f"⚠️ {ticker} sous le seuil bas ({prix:.2f} $ ≤ {self.titres[ticker]['seuil_bas']:.2f} $)")
+            if prix >= titre["seuil_haut"]:
+                alertes.append(f"⚠️ {ticker} dépasse le seuil haut ({prix:.2f} $ ≥ {titre['seuil_haut']:.2f} $)")
+            elif prix <= titre["seuil_bas"]:
+                alertes.append(f"⚠️ {ticker} sous le seuil bas ({prix:.2f} $ ≤ {titre['seuil_bas']:.2f} $)")
 
         # 4. Calcule variation
         variation_portfolio = valeur_totale - valeur_ouverture
@@ -63,6 +64,6 @@ class Portefeuille(Sujet):
             "alertes": alertes
         }
 
-        # 5. Informe les observateurs
+        # 6. Informe les observateurs
         self.notifier()
 

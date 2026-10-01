@@ -2,6 +2,7 @@
 import tkinter as tk
 from modeles.portefeuille import Portefeuille
 from observateurs.portfolio import Portfolio
+from observateurs.prices import Prices  
 
 INTERVALLE_MS = 30000
 
@@ -26,9 +27,11 @@ class App():
         # initialistion du portefeuille
         self.portefeuille = Portefeuille(TITRES)
 
-        # initialisation de l'interface du portfolio
+        # initialisation de l'interface de toutes les interfaces!
         self.portefolio_observateur = Portfolio(self.fenetre)
         self.portefeuille.abonner(self.portefolio_observateur)
+        self.prix_observateur = Prices(self.fenetre,TITRES)
+        self.portefeuille.abonner(self.prix_observateur)
 
         # Premier chargement des prix, puis boucle de rafraîchissement automatique
         self.rafraichir()

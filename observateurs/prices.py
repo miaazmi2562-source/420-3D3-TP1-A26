@@ -1,18 +1,8 @@
 import tkinter as tk
 from observateurs.observateur import Observateur
+from utils import formater_prix 
 
-
-def formater_prix(prix, ouverture):
-    """Retourne le texte et la couleur à afficher pour un prix et sa variation
-    par rapport à l'ouverture (vert si en hausse, rouge si en baisse)."""
-    variation = (prix - ouverture) / ouverture * 100
-    symbole = "▲" if variation >= 0 else "▼"
-    couleur = "green" if variation >= 0 else "red"
-    return f"{prix:.2f} $  {symbole} {abs(variation):.2f}%", couleur
-
-
-
-
+# creer la classe prices avec son constrcuteur: la fenetre et son titre 
 class Prices(Observateur):
     def __init__(self,fenetre, titres):
         self.labels_prix = {}
@@ -24,7 +14,7 @@ class Prices(Observateur):
         for ticker in titres:
             self._creer_ligne_prix(ticker)
     
-
+     
     def _creer_ligne_prix(self, ticker):
         """Ajoute la ligne d'affichage de prix pour un ticker (appelé au
         démarrage pour chaque titre, et à nouveau quand un titre est ajouté)."""
@@ -35,10 +25,10 @@ class Prices(Observateur):
         label.pack(side=tk.LEFT)
         self.labels_prix[ticker] = label
         self.frames_prix[ticker] = frame
-
+    
     def actualiser(self, sujet):
         donnees = sujet.get_donnees()
-        prix_actuel = donnees["prix"]
-        for ticker, (prix, ouverture) in prix_actuel.items():
+        prix_actuel = donnees["prix"] # va chercher le prix actuel dans les donnees : prix  
+        for ticker, (prix, ouverture) in prix_actuel.items(): #
             texte, couleur = formater_prix(prix, ouverture)
             self.labels_prix[ticker].config(text=texte, fg=couleur)

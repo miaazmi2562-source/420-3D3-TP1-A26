@@ -1,7 +1,8 @@
-# classe principal du portefeuille
-# controle son état, actualise les données des titres
-# et notifie les observateurs lors des changements.
-# contient la logic et les données, pas d'interface
+"""classe principal du portefeuille
+controle son état, actualise les données des titres
+et notifie les observateurs lors des changements.
+contient la logic et les données, pas d'interface."""
+
 from modeles.sujet import Sujet
 from utils import recuperer_prix
 class Portefeuille(Sujet):
@@ -15,7 +16,6 @@ class Portefeuille(Sujet):
             "variation_portfolio": 0.0,
             "alertes": []
         }
-
 
     def get_donnees(self) -> dict:
         return self.donnees

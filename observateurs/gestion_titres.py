@@ -4,18 +4,13 @@ from utils import entier_positif, flottant_positif, recuperer_prix, formater_pri
 
 class GestionTitres(Observateur):
     def __init__(self, fenetre, titres, prices):
-        self.prices = prices
+        self.prices = prices # objet prices
         self.fenetre = fenetre
         self.titres = titres
         self._construire_gestion()
 
     def actualiser(self, sujet):
-        donnees = sujet.get_donnees()
-        titres = donnees["titres"]
-
-        self.listbox_titres.delete(0, tk.END)
-        for ticker in titres:
-            self.listbox_titres.insert(tk.END, self._texte_listbox(ticker))
+        pass
 
     def _construire_gestion(self):
         """Construit la section "Gérer les titres" : formulaire d'ajout, liste

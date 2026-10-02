@@ -2,17 +2,8 @@
 # controle son état, actualise les données des titres
 # et notifie les observateurs lors des changements.
 # contient la logic et les données, pas d'interface
-import yfinance as yf
 from modeles.sujet import Sujet
-
-def recuperer_prix(ticker):
-    """Retourne (prix, ouverture) pour un ticker, ou lève une erreur s'il est introuvable."""
-    info = yf.Ticker(ticker).fast_info
-    prix = info["last_price"]
-    if prix is None:
-        raise ValueError(f"Le titre '{ticker}' n'existe pas.")
-    return prix, info["open"]
-
+from utils import recuperer_prix
 class Portefeuille(Sujet):
     def __init__(self, titres):
         super().__init__() # init de la classe Sujet pour notifier

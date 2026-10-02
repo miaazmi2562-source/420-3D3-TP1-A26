@@ -5,8 +5,9 @@ from observateurs.portfolio import Portfolio
 from observateurs.prices import Prices  
 from observateurs.alerts import Alerts 
 from observateurs.csv_log import Csv 
+from observateurs.gestion_titres import GestionTitres   
 
-INTERVALLE_MS = 30000
+INTERVALLE_MS = 2000 # 2 sec
 
 POLICE = ("Segoe UI", 10)
 POLICE_TITRE = ("Segoe UI", 16, "bold")
@@ -29,12 +30,16 @@ class App():
         # initialistion du portefeuille
         self.portefeuille = Portefeuille(TITRES)
 
-        # initialisation de l'interface de toutes les interfaces!
-        self.portefolio_observateur = Portfolio(self.fenetre)
-        self.portefeuille.abonner(self.portefolio_observateur)
-
+        # initialisation de toutes les interfaces(Observateurs)!
+        # Puis abonnement au portefeuille(Sujet)
         self.prix_observateur = Prices(self.fenetre,TITRES)
         self.portefeuille.abonner(self.prix_observateur)
+
+        self.gestion_titres_observateur = GestionTitres(self.fenetre, TITRES, self.prix_observateur)
+        self.portefeuille.abonner(self.gestion_titres_observateur)
+
+        self.portefolio_observateur = Portfolio(self.fenetre)
+        self.portefeuille.abonner(self.portefolio_observateur)
 
         self.alerts_observateur = Alerts(self.fenetre)
         self.portefeuille.abonner(self.alerts_observateur)
@@ -42,7 +47,7 @@ class App():
         self.csv_log_observateur = Csv(self.fenetre)
         self.portefeuille.abonner(self.csv_log_observateur)
 
-
+        
 
         # Premier chargement des prix, puis boucle de rafraîchissement automatique
         self.rafraichir()

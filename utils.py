@@ -1,3 +1,6 @@
+# un ensemble de fonctions a utiliser dans les autres classes pour ne pas les reecrire a chaque fois.
+import yfinance as yf
+
 def recuperer_prix(ticker):
     """Retourne (prix, ouverture) pour un ticker, ou lève une erreur s'il est introuvable."""
     info = yf.Ticker(ticker).fast_info

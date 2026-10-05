@@ -8,7 +8,6 @@ class Prices(Observateur):
         self.labels_prix = {}
         self.frames_prix = {}
         self.fenetre = fenetre 
-        self.titres = titres 
         self.frame_prix = tk.LabelFrame(self.fenetre, text="Prix en temps réel", padx=10, pady=10)
         self.frame_prix.pack(fill=tk.X, padx=10, pady=5)
         for ticker in titres:

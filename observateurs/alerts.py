@@ -11,9 +11,6 @@ class Alerts(Observateur):
         )
         self.label_alertes.pack(anchor="w")
 
-        self.label_maj = tk.Label(self.fenetre, text="", font=("Segoe UI", 9), fg="gray")
-        self.label_maj.pack(pady=5)
-
     
     def actualiser(self, sujet):
         donnees = sujet.get_donnees()

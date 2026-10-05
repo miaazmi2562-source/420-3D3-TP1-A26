@@ -376,6 +376,5 @@ class App:
         # Replanifie le prochain cycle, que celui-ci ait réussi ou échoué
         self.fenetre.after(INTERVALLE_MS, self.rafraichir)
 
-
 if __name__ == "__main__":
     App()
